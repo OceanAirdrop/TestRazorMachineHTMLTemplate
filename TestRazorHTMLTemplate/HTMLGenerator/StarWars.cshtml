@@ -1,0 +1,86 @@
+﻿@using SomeClassLibrary.Model
+
+@* Cast the Model object to the datatype we know it is *@
+@{ List<StarWarsCharacter> modelObj = (List<StarWarsCharacter>)Model; }
+
+
+<head>
+    <style>
+        body {
+            font-family: Sans-serif;
+        }
+
+        table.blueTable {
+            width: 100%;
+            text-align: left;
+        }
+
+        table.blueTable td,
+        table.blueTable th {
+            border: 1px solid #196094;
+        }
+
+        table.blueTable thead {
+            background: #1B5694;
+            border-bottom: 0px solid #444444;
+        }
+
+        table.blueTable thead th {
+            font-size: 17px;
+            font-weight: bold;
+            color: #F0F0F0;
+            text-align: center;
+            border-left: 2px solid #128594;
+        }
+
+        table.blueTable thead th:first-child {
+            border-left: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Star Wars Report for @DateTime.Now.ToString("dd-MM-yyyy")</h2>
+
+
+    <table class='blueTable'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Height</th>
+                <th>HairColour</th>
+                <th>Mass</th>
+                <th>Gender</th>
+                <th>BirthYear</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @modelObj)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Height</td>
+                    <td>@ChangeHairColour(@item)</td>
+                    <td>@item.Mass</td>
+                    <td>@item.Gender</td>
+                    <td>@item.BirthYear</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+
+@functions {
+
+    // Pass a user name to this method.
+    string ChangeHairColour(StarWarsCharacter character)
+    {
+        if (character.HairColour == "n/a")
+            return "Not Applicable";
+
+        return character.HairColour;
+    }
+
+}

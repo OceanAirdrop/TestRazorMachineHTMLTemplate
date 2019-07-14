@@ -1,0 +1,21 @@
+﻿@using TestRazorHTMLTemplate.Model
+
+@* Cast the Model object to the datatype we know it is *@
+@{ EmailReport modelObj = (EmailReport)Model; }
+
+<body>
+
+    <h2>Email Report for @DateTime.Now.ToString("dd-MM-yyyy")</h2>
+    <h3>Report Name: @modelObj.ReportName</h3>
+        
+    <ul>
+
+        @foreach (var issue in @modelObj.Problems)
+        {
+            <li>@issue</li>
+        }
+    </ul>
+    <br />
+
+</body>
+
